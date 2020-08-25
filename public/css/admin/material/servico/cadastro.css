@@ -2,8 +2,9 @@
   background-color: #dddedb;
 }
 
-.material {
-    padding: 5% 0;
+.table {
+  height: 50vh;
+  overflow-y: auto;
 }
 
 .info {
