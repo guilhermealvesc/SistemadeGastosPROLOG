@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../../../css/admin/funcionarios/material.css" />
-  <title>Controle de Gastos de Clientes | Material</title>
+  <link rel="stylesheet" href="../../../../css/admin/funcionarios/cadastro.css" />
+  <title>Controle de Gastos de Clientes | Funcionários</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
     </button>
     <div class="collapse navbar-collapse" id="header">
       <div class="navbar-nav">
-        <a class="nav-link" href="../../cadastros/">Cadastros</a>
+        <a class="nav-link active" href="../../cadastros/">Cadastros</a>
         <a class="nav-link" href="#">Material</a>
         <a class="nav-link" href="#">Ordem de Serviço</a>
         <a class="nav-link" href="../../consultas/">Consultas</a>
@@ -29,7 +29,7 @@
     </div>
   </nav>
   <div class="main-content">
-    <h5>Material</h5>
+    <h5>Funcionário</h5>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#page" aria-controls="page"
         aria-expanded="false" aria-label="Toggle navigation">
@@ -48,9 +48,9 @@
           <form method="get">
             <label for="type">Pesquisar: </label>
             <select name="type" id="type">
-              <option value="material">Material</option>
-              <option value="estoque">Estoque</option>
-              <option value="servico">Serviço</option>
+              <option value="material">Funcionário</option>
+              <option value="estoque">Usuário</option>
+              <option value="servico">Função</option>
             </select>
             <input type="text">
             <input type="button" value="Buscar">
@@ -148,7 +148,6 @@
         <button class="btn btn-light" disabled="disabled">Cancelar</button>
         <button class="btn btn-light">+ Incluir</button>
         <button class="btn btn-light">Alterar</button>
-        <button class="btn btn-light">Confirmar</button>
         <button class="btn btn-light">- Excluir</button>
         <button class="btn btn-light">? Ajuda</button>
       </div>
