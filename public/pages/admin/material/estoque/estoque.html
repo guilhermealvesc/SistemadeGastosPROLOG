@@ -18,7 +18,7 @@
     />
     <link
       rel="stylesheet"
-      href="../../../../css/admin/material/servico/cadastro.css"
+      href="../../../../css/admin/material/estoque/estoque.css"
     />
     <title>Controle de Gastos de Clientes</title>
   </head>
@@ -47,7 +47,7 @@
       </div>
     </nav>
     <div class="main-content">
-      <h5>Serviço</h5>
+      <h5>Estoque</h5>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button
           class="navbar-toggler"
@@ -62,40 +62,80 @@
         </button>
         <div class="collapse navbar-collapse" id="page">
           <div class="navbar-nav">
-            <a class="nav-link" href="./servico.html">Relatório</a>
-            <a class="nav-link active" href="#">Cadastro</a>
+            <a class="nav-link active" href="#">Relatório</a>
+            <a class="nav-link" href="./cadastro.html">Cadastro</a>
           </div>
         </div>
       </nav>
       <div class="row info">
         <div class="col-lg-10 col-md-10">
-          <div class="servico">
-            <form method="POST">
-              <label for="type">* Serviço: </label>
+          <div class="search">
+            <form method="get">
+              <label for="type">Pesquisar: </label>
+              <select name="type" id="type">
+                <option value="estoque">Estoque</option>
+                <option value="material">Material</option>
+                <option value="servico">Serviço</option>
+              </select>
               <input type="text" required>
-              <input type="submit" value="Adicionar">
+              <input type="submit" value="Buscar">
             </form>
           </div>
           <table class="table">
             <thead>
               <th style="text-align: center;">Material</th>
+              <th style="text-align: center;">Quantidade</th>
             </thead>
             <tbody>
               <tr>
                 <td>
-                  Capa preta A4
+                  Capa azul A4
                 </td>
+                <td>200</td>
+              </tr>
+              <tr>
+                <td>
+                  Capa azul A4
+                </td>
+                <td>65</td>
+              </tr>
+              <tr>
+                <td>
+                  Capa azul A4
+                </td>
+                <td>49</td>
+              </tr>
+              <tr>
+                <td>
+                  Capa azul A4
+                </td>
+                <td>70</td>
+              </tr>
+              <tr>
+                <td>
+                  Capa azul A4
+                </td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>
+                  Capa azul A4
+                </td>
+                <td>150</td>
+              </tr>
+              <tr>
+                <td>
+                  Capa azul A4
+                </td>
+                <td>0</td>
               </tr>
             </tbody>
           </table>
-          <p>* Campo obrigatório!!</p>
         </div>
         <div class="buttons col-lg-2 col-md-2">
           <button class="btn btn-light" disabled="disabled">Confirmar</button>
           <button class="btn btn-light" disabled="disabled">Cancelar</button>
-          <button class="btn btn-light">+ Incluir</button>
-          <button class="btn btn-light">Alterar</button>
-          <button class="btn btn-light">Confirmar</button>
+          <button class="btn btn-light">+ Somar</button>
           <button class="btn btn-light">- Excluir</button>
           <button class="btn btn-light">? Ajuda</button>
         </div>
