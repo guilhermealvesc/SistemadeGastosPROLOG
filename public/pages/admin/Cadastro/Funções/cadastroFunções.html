@@ -43,8 +43,8 @@
             </div>
         </nav>
         <div class="row info">
-            <div class="col-lg-10 col-md-10" style="margin: 1rem;">
-                <form style="padding: 1rem">
+            <div class="col-lg-10 col-md-10">
+                <form>
                     <div class="form-group row">
                         <label for="inputFuncao" class="col-sm-2 col-form-label">Função</label>
                         <div class="col-sm-4">
@@ -54,18 +54,17 @@
                     <div>
                         <label style="margin-right: 20px;">Acesso a todo o sistema</label>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="checkSim" name="Sim" class="custom-control-input">
+                            <input type="radio" id="checkSim" name="option" class="custom-control-input" value="sim">
                             <label class="custom-control-label" for="checkSim">Sim</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="checkNao" name="Nao" class="custom-control-input">
+                            <input type="radio" id="checkNao" name="option" class="custom-control-input" value="nao">
                             <label class="custom-control-label" for="checkNao">Não</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Submit</button>
                 </form>
             </div>
-            <div class="buttons col-lg-1 col-md-1 lado">
+            <div class="buttons col-lg-2 col-md-2 lado" style="padding-bottom: 1rem">
                 <button class="btn btn-light" disabled="disabled">Confirmar</button>
                 <button class="btn btn-light" disabled="disabled">Cancelar</button>
                 <button class="btn btn-light">+ Incluir</button>
