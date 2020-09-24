@@ -8,23 +8,19 @@
 
 
 :- persistent
-chave(nome:atom,
-      valor:positive_integer).
+    chave(nome:atom,
+          valor:positive_integer).
 
 
 :- initialization( db_attach('../tables/tbl_chave.pl', []) ).
 
-atualiza(Nome, Valor):-
- with_mutex(chave,
-            ( retractall_chave(Nome,_), % remove o valor antigo
-              assert_chave(Nome, Valor)) ). % atualiza com o novo
-
-
-
 pk(Nome, Valor):-
-    chave(Nome, ValorAntigo), !,
-    Valor is ValorAntigo + 1,
-    atualiza(Nome,Valor).      
+  chave(Nome, _V), !,
+  with_mutex(chave,
+      (chave(Nome, ValorAntigo),
+      Valor is ValorAntigo + 1,
+      retractall_chave(Nome, _),
+      assert_chave(Nome, Valor))).
 
 
 pk(Nome, 1):-

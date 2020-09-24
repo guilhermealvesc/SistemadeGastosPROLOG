@@ -28,32 +28,38 @@ liga_arquivo(Arquivo) :- !,
 
 
 /* FUNCIONÁRIOS (CONSULTAS E CRUD) */
+/* ENDEREÇO (CONSULTAS E CRUD) A tabela de endereçoes está subordinada a de funcionários */
+
 cadastra_funcionario(Nome, Usuario, Senha, Func, Rua, Nr_casa, 
     Complemento, Bairro, Cidade, CEP, Tel1, Tel2) :-
-        funcao:funcao(CdFuncao, Func, _TpVis),
+        funcao:funcao(CdFuncao, Func, TpVis),
         endereco:insere(CdEnd, Rua, Nr_casa, 
             Complemento, Bairro, Cidade, CEP, Tel1, Tel2),
         funcionario:insere(_CdFun, CdFuncao, CdEnd, Nome, 
-            Senha, Usuario, _TpVis).
+            Senha, Usuario, TpVis).
 
 remove_funcionario(CdFun) :-
     \+ ordem_servico:ordem_servico(_CdOrdemS, CdFun, _CdCliente, _DtOrdemS, _VlTot, _BoolF),
-    funcionario:remove(CdFun).
+    funcionario:funcionario(CdFun, _CdFuncao, CdEnd, _Nome, _Senha, _Nick, _TpVis),
+    endereco:endereco(CdEnd, _Nm_rua, _Nr_casa, _Complemento, _Nm_bairro, 
+    _Nm_cidade, _Cep, _Tel1, _Tel2),
+    funcionario:remove(CdFun),
+    endereco:remove(CdEnd).
 
-%Estou atualizando o funcionario pelo código dele, mas nao sei se esse valor
-%vem do front
 atualiza_funcionario(CdFun, Nome, Usuario, Senha, Func, Rua, Nr_casa, 
     Complemento, Bairro, Cidade, CEP, Tel1, Tel2) :- 
-        funcao:funcao(CdFuncao, Func, _TpVis),
-        endereco:insere(CdEnd, Rua, Nr_casa, 
+        funcao:funcao(CdFuncao, Func, TpVis),
+        endereco:atualiza(CdEnd, Rua, Nr_casa, 
             Complemento, Bairro, Cidade, CEP, Tel1, Tel2),
         funcionario:atualiza(CdFun, CdFuncao, CdEnd, Nome, 
-            Senha, Usuario, _TpVis).
+            Senha, Usuario, TpVis).
 
 lista_funcionarios(List) :-
     findall((Name, Nick, Funcao), 
         (funcionario:funcionario(_CdFunc, CdFuncao, _CdEnd, Name, _Senha, Nick, _TpVis),
         funcao:funcao(CdFuncao, Funcao, _TpVis)), List).
+
+/* ENDEREÇO (CONSULTAS E CRUD) A tabela de endereçoes está subordinada a de funcionários */
 /* FUNCIONÁRIOS (CONSULTAS E CRUD) */
 
 /* FUNÇÃO (CONSULTAS E CRUD) */

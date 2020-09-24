@@ -6,9 +6,9 @@
 :- use_module(chave, []).
 
 :- persistent 
-funcao(cd_funcao:positive_integer,
-    ds_funcao:atom,
-    tp_visivel:boolean).
+    funcao(cd_funcao:positive_integer,
+        ds_funcao:atom,
+        tp_visivel:boolean).
 
 arquivo_da_tabela(Arquivo):-
     db_attach(Arquivo, []).

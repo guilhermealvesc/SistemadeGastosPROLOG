@@ -12,7 +12,7 @@
         nm_funcionario:atom,
         ds_senha:atom,
         nick:atom,
-        tp_visivel:nonneg).
+        tp_visivel:boolean).
 
 arquivo_da_tabela(Arquivo):-
     db_attach(Arquivo, []).
