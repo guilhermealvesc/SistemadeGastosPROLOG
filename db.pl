@@ -1,6 +1,7 @@
 :- load_files([ routes,
                 schemas(funcionario),
-                schemas(funcao) 
+                schemas(funcao),
+                schemas(ordem_servico) 
               ],
 	          [ if(not_loaded), 
                 silent(true) 
@@ -10,6 +11,7 @@
 
 tabela(funcionario).
 tabela(funcao).
+tabela(ordem_servico).
 
 inicializa_tabelas :-
     findall(Tabela, tabela(Tabela), Tabelas),
@@ -28,7 +30,8 @@ liga_arquivo(Arquivo) :- !,
 
 
 /* FUNCIONÁRIOS (CONSULTAS E CRUD) */
-/* ENDEREÇO (CONSULTAS E CRUD) A tabela de endereçoes está subordinada a de funcionários */
+/* ENDEREÇO (CONSULTAS E CRUD) A tabela de endereçoes está subordinada a de funcionários e clientes */
+
 
 cadastra_funcionario(Nome, Usuario, Senha, Func, Rua, Nr_casa, 
     Complemento, Bairro, Cidade, CEP, Tel1, Tel2) :-
@@ -59,8 +62,45 @@ lista_funcionarios(List) :-
         (funcionario:funcionario(_CdFunc, CdFuncao, _CdEnd, Name, _Senha, Nick, _TpVis),
         funcao:funcao(CdFuncao, Funcao, _TpVis)), List).
 
-/* ENDEREÇO (CONSULTAS E CRUD) A tabela de endereçoes está subordinada a de funcionários */
+/* ENDEREÇO (CONSULTAS E CRUD) A tabela de endereçoes está subordinada a de funcionários e clientes */
 /* FUNCIONÁRIOS (CONSULTAS E CRUD) */
+
+/* ORDEM SERVIÇO (CONSULTAS E CRUD) */
+cadastra_ordem_servico(CdFun, CdClient, CdServ, Qnt, DtOrdemS, ValorUnit, VlTot, QntMat, BoolF) :-
+    funcionario:funcionario(CdFun, _CdFuncao, _CdEnd, _Name, _Senha, _Nick, TpVis),
+    cliente:cliente(CdClient, _CdEnd, _NmRazao, _Nmfant, _DsEmail, _CodId, _Tipo, _TpVis),
+    servico:servico(CdServ, _NmServ, TpVis),
+    ordem_servico:insere(CdOrderS, CdFunc, CdClient, DtOrdemS, VlTot, BoolF),
+    servico_prestado:insere(_CdSP, CdServ, CdFun, CdOrderS, Qnt, ValorUnit, VlTot, QntMat).
+
+remove_ordem_servico(CdOrderS, CdFun) :-
+    \+ servico_prestado:servico_prestado(_CdSP, _Serv, CdFun, CdOrderS, _QntSer, _VlUnit, _VlTotal, _QntMat),
+    \+ estoque:estoque(_CdEst, CdFun, CdOrderS, _CdMat, _QntMatSoma, _QntMatSub),
+    ordem_servico:remove(CdOrdemS, CdFun).
+
+atualiza_ordem_servico(CdFun, CdClient, CdServ, Qnt, DtOrdemS, ValorUnit, VlTot, QntMat, BoolF) :- 
+    funcionario:funcionario(CdFun, _CdFuncao, _CdEnd, _Name, _Senha, _Nick, TpVis),
+    cliente:cliente(CdClient, _CdEnd, _NmRazao, _Nmfant, _DsEmail, _CodId, _Tipo, _TpVis),
+    servico:servico(CdServ, _NmServ, TpVis),
+    ordem_servico:atualiza(CdOrderS, CdFunc, CdClient, DtOrdemS, VlTot, BoolF),
+    servico_prestado:atualiza(_CdSP, CdServ, CdFun, CdOrderS, Qnt, ValorUnit, VlTot, QntMat).
+
+listar_ordem_servico(Lista) :-
+    findall((Data, Cliente, Func, Total),
+        (ordem_servico:ordem_servico(CdOrderS, CdFunc, CdClient, Data, Total, _BoolF),
+        funcionario:funcionario(CdFun, _CdFuncao, _CdEnd, Func, _Senha, _Nick, TpVis),
+        cliente:cliente(CdClient, _CdEnd, Total, _Nmfant, _DsEmail, _CodId, _Tipo, _TpVis)), List).
+
+listar_ordem_servico_cad(Lista) :-
+    findall((Qnt, Serv, ValUnit, Tot, QntServ),
+    (ordem_servico:ordem_servico(CdOrderS, CdFunc, _CdClient, _Data, Tot, _BoolF),
+    servico_prestado:servico_prestado(_CdServP, CodServ, CdFunc, CdOrderS, Qnt, ValUnit, Tot, QntServ),
+    servico:servico(CodServ, Serv, _TpVis)), Lista).
+/* ORDEM SERVIÇO (CONSULTAS E CRUD) */
+
+/* SERVIÇO (CONSULTAR E CRUD) */
+
+/* SERVIÇO (CONSULTAR E CRUD) */
 
 /* FUNÇÃO (CONSULTAS E CRUD) */
 cadastra_funcao(Ds_funcao, TpVis) :-

@@ -24,8 +24,8 @@ pk(Nome, Valor):-
 
 
 pk(Nome, 1):-
-with_mutex(chave,
-          assert_chave(Nome, 1)). % Cria uma chave com valor inicial 1
+  with_mutex(chave,
+      assert_chave(Nome, 1)). % Cria uma chave com valor inicial 1
           
 % Talvez você queira um valor incial diferente de 1
 
