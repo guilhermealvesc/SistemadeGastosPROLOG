@@ -1,6 +1,6 @@
 :- module(
     endereco, 
-    [ endereco/10 ]).
+    [ endereco/9 ]).
 
 :- use_module(library(persistency)).
 :- use_module(chave, []).
@@ -17,7 +17,8 @@
         tem2:atom).
 
 arquivo_da_tabela(Arquivo):-
-    db_attach(Arquivo, []).
+    db_attach(Arquivo, []),
+    at_halt(db_sync(gc(always))).
 
 insere(CdEnd, Nm_rua, Nr_casa, Complemento, Nm_bairro, 
         Nm_cidade, Cep, Tel1, Tel2) :-
@@ -35,6 +36,3 @@ atualiza(CdEnd, Nm_rua, Nr_casa, Complemento, Nm_bairro,
         retractall_endereco(CdEnd, _, _, _, _, _, _, _, _),
         assert_endereco(CdEnd, Nm_rua, Nr_casa, Complemento, Nm_bairro, 
             Nm_cidade, Cep, Tel1, Tel2)).
-
-sincroniza :-
-    db_sync(gc(always)).

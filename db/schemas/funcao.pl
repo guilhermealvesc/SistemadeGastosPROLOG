@@ -11,7 +11,8 @@
         tp_visivel:boolean).
 
 arquivo_da_tabela(Arquivo):-
-    db_attach(Arquivo, []).
+    db_attach(Arquivo, []),
+    at_halt(db_sync(gc(always))).
 
 insere(CdFuncao, Ds_funcao, TpVis) :-
     chave:pk(funcao, CdFuncao),
@@ -31,5 +32,4 @@ listar(Lista) :-
     findall((Ds_funcao, Tp_visivel), 
         funcao:funcao(_CdFuncao, Ds_funcao, Tp_visivel), Lista).
     
-sincroniza :-
-    db_sync(gc(always)).
+ 

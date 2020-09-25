@@ -1,7 +1,7 @@
 :- module(
     chave,
     [ pk/2,
-      cria_pk/2 ]
+      inicia_pk/2 ]
 ).
 
 :- use_module(library(persistency)).
@@ -12,27 +12,23 @@
           valor:positive_integer).
 
 
-:- initialization( db_attach('../tables/tbl_chave.pl', []) ).
+:- initialization((db_attach('./db/tables/tbl_chave.pl', []), 
+                  at_halt(db_sync(gc(always))))).
+
 
 pk(Nome, Valor):-
-  chave(Nome, _V), !,
-  with_mutex(chave,
-      (chave(Nome, ValorAntigo),
-      Valor is ValorAntigo + 1,
-      retractall_chave(Nome, _),
-      assert_chave(Nome, Valor))).
+  with_mutex(Nome,
+              ( (chave(Nome, ValorAtual) ->
+                    ValorAntigo = ValorAtual;
+                    ValorAntigo = 0),
+                Valor is ValorAntigo + 1,
+                retractall_chave(Nome,_), % remove o valor antigo
+                assert_chave(Nome, Valor)) ). % atualiza com o novo
 
+% Talvez você queira um valor inicial diferente de 1
 
-pk(Nome, 1):-
-  with_mutex(chave,
-      assert_chave(Nome, 1)). % Cria uma chave com valor inicial 1
-          
-% Talvez você queira um valor incial diferente de 1
-
-
-cria_pk(Nome, _):-
-chave(Nome, _), % Se já existir uma chave com o nome dado, não atualiza
-!.
-cria_pk(Nome, ValorInicial):-
-with_mutex(chave,
-           assert_chave(Nome, ValorInicial)).
+inicia_pk(Nome, ValorInicial):-
+  with_mutex(Nome,
+            (chave(Nome, _) ->
+                true; % Não inicializa caso a chave já exista
+                assert_chave(Nome, ValorInicial)) ).

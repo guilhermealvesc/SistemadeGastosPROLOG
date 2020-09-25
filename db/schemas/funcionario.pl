@@ -15,7 +15,8 @@
         tp_visivel:boolean).
 
 arquivo_da_tabela(Arquivo):-
-    db_attach(Arquivo, []).
+    db_attach(Arquivo, []),
+    at_halt(db_sync(gc(always))).
 
 insere(CdFun, CdFuncao, CdEnd, Nome, Senha, Nick, TpVis) :-
     chave:pk(funcionario, CdFun),
@@ -30,6 +31,3 @@ atualiza(CdFun, CdFuncao, CdEnd, Nome, Senha, Nick, TpVis) :-
     with_mutex(funcionarios,
         retractall_funcionario(CdFun, _CdFuncao, _CdEnd, _Nome, _Senha, _Nick, _TpVis),
         assert_funcionario(CdFun, CdFuncao, CdEnd, Nome, Senha, Nick, TpVis)).
-
-sincroniza :-
-    db_sync(gc(always)).
