@@ -23,15 +23,15 @@ arquivo_da_tabela(Arquivo):-
 
 insere(CdFechamentoMes, CdCliente, DtEmissao, VlMensal, VlJuros, DtPagamento, Pago, NrNotafiscal, BoolFechado) :-
     chave:pk(fechamento_mes, CdFun),
-    with_mutex(fechamento_mess, 
+    with_mutex(fechamento_mes, 
         assert_fechamento_mes(CdFechamentoMes, CdCliente, DtEmissao, VlMensal, VlJuros, DtPagamento, Pago, NrNotafiscal, BoolFechado)).
 
 remove(CdFun) :- 
-    with_mutex(fechamento_mess, 
+    with_mutex(fechamento_mes, 
         retract_fechamento_mes(CdFechamentoMes, _CdCliente, _DtEmissao, _VlMensal, _VlJuros, _DtPagamento, _Pago, _NrNotafiscal, _BoolFechado)).
 
 atualiza(CdFechamentoMes, _CdCliente, DtEmissao, VlMensal, VlJuros, DtPagamento, Pago, NrNotafiscal, BoolFechado) :-
-    with_mutex(fechamento_mess,
+    with_mutex(fechamento_mes,
         retractall_fechamento_mes(CdFechamentoMes, _CdCliente, _DtEmissao, _VlMensal, _VlJuros, _DtPagamento, _Pago, _NrNotafiscal, _BoolFechado),
         assert_fechamento_mes(CdFechamentoMes, CdCliente, DtEmissao, VlMensal, VlJuros, DtPagamento, Pago, NrNotafiscal, BoolFechado)).
 
