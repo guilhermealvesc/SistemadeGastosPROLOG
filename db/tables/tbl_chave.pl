@@ -1,3 +1,3 @@
-created(1601068043.958416).
+created(1601304988.717551).
 assert(chave(braba,2)).
 assert(chave(funcao,2)).
