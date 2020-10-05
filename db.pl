@@ -15,36 +15,6 @@
                 silent(true) 
 	          ]).
         
-:- initialization(inicializa_tabelas).
-
-
-tabela(cliente).
-tabela(endereco).
-tabela(estoque).
-tabela(fechamento_mes).
-tabela(funcao).
-tabela(funcionario).
-tabela(material_servico).
-tabela(material).
-tabela(ordem_servico).
-tabela(servico_prestado).
-tabela(servico).
-
-
-inicializa_tabelas :-
-    findall(Tabela, tabela(Tabela), Tabelas),
-    liga_todos_arquivos(Tabelas).
-
-liga_todos_arquivos([Tabela|Tabelas]) :-
-    liga_arquivo(Tabela), !,
-    liga_todos_arquivos(Tabelas).
-
-liga_todos_arquivos([]).
-
-liga_arquivo(Arquivo) :- !,
-    atomic_list_concat(['tbl_', Arquivo, '.pl'], NomeArq),
-    expand_file_search_path(tables(NomeArq), CaminhoArqTable),
-    Arquivo:arquivo_da_tabela(CaminhoArqTable).
 
 /* FUNÇÃO (CONSULTAS E CRUD) */
 cadastra_funcao(CdFuncao, Ds_funcao, TpVis) :-
