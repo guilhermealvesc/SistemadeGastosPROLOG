@@ -2,7 +2,7 @@
 :- use_module(library(http/html_head)).
 
 :- ensure_loaded(temp(bootstrap)).
-:- use_module(schemas(funcionario)).
+:- use_module('./backend/db/schemas/funcionario.pl').
 
 cadastro(_):-
     reply_html_page(

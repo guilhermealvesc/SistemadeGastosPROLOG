@@ -6,7 +6,6 @@
 
 user:body(bootstrap, Corpo) -->
        html(body([ \html_root_attribute(lang,'pt-br'),
-
                    Corpo,
 
                    \scripts

@@ -28,8 +28,10 @@ http:location(api1, api(v1), []).
 % Frontend
 :- http_handler(root(.),
                 login(Metodo), [method(Metodo), methods([get, post])]).
-
-
+:- http_handler(root(home),
+                    home, []).
+:- http_handler(funcionarios(cadastro),
+                    cadastro, []).
 % Backend
 :- http_handler( api1(bookmarks/Id),
                  bookmarks(Metodo, Id) ,

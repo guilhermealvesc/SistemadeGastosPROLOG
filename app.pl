@@ -64,7 +64,7 @@ user:file_search_path(tables,  db(tables)).
                 temp(bootstrap),
                 /* %carregando pages padrões
                 frontend(connect), */
-                frontend(login)
+                frontend(login),
                 /* frontend(home),
                 frontend(about),
                 frontend(help),
@@ -73,9 +73,9 @@ user:file_search_path(tables,  db(tables)).
                 %carregando admin
                 admin(home),
                 clientes(cadastro),
-                clientes(relatorio),
-                funcionarios(cadastro),
-                funcionarios(relatorio),
+                clientes(relatorio), */
+                funcionarios(cadastro)
+                /* funcionarios(relatorio),
                 funcoes(cadastro),
                 funcoes(relatorio),
                 consultas(mensal),
