@@ -27,25 +27,6 @@ links -->
   integrity('sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z'), crossorigin('anonymous')], []),
   link([rel(stylesheet), href('/css/login.css')], [])]).
 
-log(Pedido) -->
-  {
-        catch(
-            http_parameters(Pedido, [
-                user(User, [atom, length > 0]),
-                pass(Pass, [atom, length > 0])
-            ]), 
-        _E, fail),
-        funcionario:funcionario(_, _, _, Nome, Pass, User, false), !
-  },
-  html(div([class('main-content')],[
-    form([method('POST'), action('/')], [
-      img([class('logo img-thumbnail'), src('/img/logo.png'), alt('Logo Sistema')], []),
-      p(['Bem vindo ~w' - Nome]),
-      div([class(buttons)], [
-        a([href('/home')], 'Home')
-      ])
-    ])
-  ])).
 
 log(Pedido) -->
   {
@@ -55,14 +36,15 @@ log(Pedido) -->
                 pass(Pass, [atom, length > 0])
             ]), 
         _E, fail),
-        funcionario:funcionario(_, _, _, Nome, Pass, User, true), !
+        funcionario:funcionario(_, _, _, Nome, Pass, User, Admin), !,
+        (Admin -> Route = '/admin'; Route = '')
   },
   html(div([class('main-content')],[
     form([method('POST'), action('/')], [
       img([class('logo img-thumbnail'), src('/img/logo.png'), alt('Logo Sistema')], []),
       p(['Bem vindo ~w' - Nome]),
       div([class(buttons)], [
-        a([href('/admin/home')], 'Home')
+        a([href(Route +'/home')], 'Home')
       ])
     ])
   ])).
