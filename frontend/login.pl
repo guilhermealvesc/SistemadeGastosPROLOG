@@ -35,7 +35,7 @@ log(Pedido) -->
                 pass(Pass, [atom, length > 0])
             ]), 
         _E, fail),
-        funcionario:funcionario(_, _, _, Nome, Pass, User, _), !
+        funcionario:funcionario(_, _, _, Nome, Pass, User, false), !
   },
   html(div([class('main-content')],[
     form([method('POST'), action('/')], [
@@ -43,6 +43,26 @@ log(Pedido) -->
       p(['Bem vindo ~w' - Nome]),
       div([class(buttons)], [
         a([href('/home')], 'Home')
+      ])
+    ])
+  ])).
+
+log(Pedido) -->
+  {
+        catch(
+            http_parameters(Pedido, [
+                user(User, [atom, length > 0]),
+                pass(Pass, [atom, length > 0])
+            ]), 
+        _E, fail),
+        funcionario:funcionario(_, _, _, Nome, Pass, User, true), !
+  },
+  html(div([class('main-content')],[
+    form([method('POST'), action('/')], [
+      img([class('logo img-thumbnail'), src('/img/logo.png'), alt('Logo Sistema')], []),
+      p(['Bem vindo ~w' - Nome]),
+      div([class(buttons)], [
+        a([href('/admin/home')], 'Home')
       ])
     ])
   ])).

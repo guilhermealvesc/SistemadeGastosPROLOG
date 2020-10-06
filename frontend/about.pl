@@ -25,8 +25,8 @@ navbarAbout -->
     div([class('collapse navbar-collapse'), id('navbarNavAltMarkup')],
     [div([class('navbar-nav')], [
         a([class('nav-link'), href('/ordemservico')], ['Ordem de Servico']), 
-        a([class('nav-link active'), href('/sobre')], ['Sobre']), 
-        a([class('nav-link'), href('/ajuda')], ['Ajuda'])
+        a([class('nav-link active'), href('/about')], ['Sobre']), 
+        a([class('nav-link'), href('/help')], ['Ajuda'])
     ])])])).
 
 about -->
