@@ -1,2 +1,1 @@
-created(1601919927.504252).
-assert(chave(funcionario,1)).
+created(1601987979.490764).
