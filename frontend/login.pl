@@ -41,18 +41,6 @@ log(Pedido) -->
     form([method('POST'), action('/')], [
       img([class('logo img-thumbnail'), src('/img/logo.png'), alt('Logo Sistema')], []),
       p(['Bem vindo ~w' - Nome]),
-      div([class('form-group row')], [
-        label([for('staticEmail'), class('col-md-2 col-form-label')], 'Usuario:'),
-        div([class('col-md-10')], [
-          input([name(user),type(text), required, class('form-control'), id('staticEmail'), placeholder('Digite usuario')], [])
-        ])
-      ]),
-      div([class('form-group row')], [
-        label([for('inputPassword'), class('col-md-2 col-form-label')], 'Senha:'),
-        div([class('col-md-10')], [
-          input([name(pass), type(password), class('form-control'), id('inputPassword'), placeholder('Digite a senha'), required], [])
-        ])
-      ]),
       div([class(buttons)], [
         a([href('/home')], 'Home')
       ])

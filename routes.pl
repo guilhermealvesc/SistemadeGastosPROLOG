@@ -12,6 +12,8 @@
 
 http:location(img, root(img), []).
 http:location(home, root(home), []).
+http:location(about, root(about), []).
+http:location(help, root(help), []).
 /* http:location(api, root(api), []).
 http:location(api1, api(v1), []). */
 http:location(funcionarios, funcionarios, []).
@@ -31,6 +33,8 @@ http:location(funcionarios, funcionarios, []).
                 login(Metodo), [method(Metodo), methods([get, post])]).
 
 :- http_handler(home(.), home, []).
+:- http_handler(about(.), about, []).
+:- http_handler(help(.), help, []).
 
 :- http_handler(funcionarios(cadastro),
                     cadastro, []).

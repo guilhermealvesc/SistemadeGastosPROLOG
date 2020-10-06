@@ -65,8 +65,8 @@ user:file_search_path(tables,  db(tables)).
                 %carregando pages padrões 
                 frontend(login),
                 frontend(home),
-                /* frontend(about),
-                frontend(help),
+                frontend(about),
+                /* frontend(help),
                 service(cadastro),
                 service(relatorio),
                 %carregando admin
