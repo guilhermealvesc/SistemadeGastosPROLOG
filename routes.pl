@@ -1,7 +1,6 @@
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_path)).
 
-
 :- multifile http:location/3.
 :- dynamic   http:location/3.
 
@@ -12,8 +11,10 @@
 %      ser definidos.
 
 http:location(img, root(img), []).
-http:location(api, root(api), []).
-http:location(api1, api(v1), []).
+http:location(home, root(home), []).
+/* http:location(api, root(api), []).
+http:location(api1, api(v1), []). */
+http:location(funcionarios, funcionarios, []).
 
 
 :- http_handler(css(.),
@@ -28,12 +29,13 @@ http:location(api1, api(v1), []).
 % Frontend
 :- http_handler(root(.),
                 login(Metodo), [method(Metodo), methods([get, post])]).
-:- http_handler(root(home),
-                    home, []).
+
+:- http_handler(home(.), home, []).
+
 :- http_handler(funcionarios(cadastro),
                     cadastro, []).
 % Backend
-:- http_handler( api1(bookmarks/Id),
+/* :- http_handler( api1(bookmarks/Id),
                  bookmarks(Metodo, Id) ,
                  [ method(Metodo),
-                   methods([ get, post, put, delete ]) ]).
+                   methods([ get, post, put, delete ]) ]). */

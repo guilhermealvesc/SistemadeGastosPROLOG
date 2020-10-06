@@ -6,7 +6,7 @@
 
 user:body(bootstrap, Corpo) -->
        html(body([ \html_root_attribute(lang,'pt-br'), 
-                   \html_post(head, [link([rel(icon), href('img/favicon.ico'), type('image/x-icon')], [])]),
+                   \html_post(head, [link([rel(icon), href('/img/favicon.ico'), type('image/x-icon')], [])]),
        
                    Corpo,
 

@@ -62,11 +62,10 @@ user:file_search_path(tables,  db(tables)).
 :- load_files([ server,
                 routes,
                 temp(bootstrap),
-                /* %carregando pages padrões
-                frontend(connect), */
+                %carregando pages padrões 
                 frontend(login),
-                /* frontend(home),
-                frontend(about),
+                frontend(home),
+                /* frontend(about),
                 frontend(help),
                 service(cadastro),
                 service(relatorio),

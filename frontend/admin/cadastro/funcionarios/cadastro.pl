@@ -8,9 +8,9 @@ cadastro(_):-
     reply_html_page(
         bootstrap,
         [ title('Controle de Gastos de Clientes | Funcionario'), \html_requires(css('admin/cadastros/funcionarios/cadastro.css'))],
-        [ \navbar, \page ]).
+        [ \navbarCadFun, \pageCadFun ]).
 
-navbar --> 
+navbarCadFun --> 
     html(nav([class('navbar navbar-expand-lg navbar-light bg-light')], 
     [button([class('navbar-toggler'), type(button), 'data-toogle'(collapse), 'data-target'('#header'), 'aria-controls'(header),
     'aria-expanded'(false), 'aria-label'('Toggle navigation')], [span([class('navbar-toggler-icon')], [])]), 
@@ -24,10 +24,10 @@ navbar -->
         a([class('nav-link'), href('./ajuda')], ['Ajuda'])
     ])])])).
 
-page -->
+pageCadFun -->
     html(div([class('main-content')],
             [h5('Funcionario'), 
-            \navpage,
+            \navpageCadFun,
             div([class('row info')], [
                 div([class('col-lg-10 col-md-10')], [
                     div([class(search)], [
@@ -107,10 +107,10 @@ page -->
                         button([type(submit), class('btn btn-light')], 'Submit')
                     ])
                 ]),
-                \buttons
+                \buttonsCadFun
             ])])).
 
-navpage --> 
+navpageCadFun --> 
     html(nav([class('navbar navbar-expand-lg navbar-light bg-light')], 
     [button([class('navbar-toggler'), type(button), 'data-toogle'(collapse), 'data-target'('#page'), 'aria-controls'(page),
     'aria-expanded'(false), 'aria-label'('Toggle navigation')], [span([class('navbar-toggler-icon')], [])]), 
@@ -120,7 +120,7 @@ navpage -->
     a([class('nav-link'), href('./cadastro')], ['Cadastro']) 
     ])])])).
 
-buttons --> 
+buttonsCadFun --> 
     html(div([class('buttons col-lg-2 col-md-2 lado')], [
         button([class('btn btn-light'), disabled(disabled)], 'Confirmar'),
         button([class('btn btn-light'), disabled(disabled)], 'Cancelar'),
