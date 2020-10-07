@@ -17,7 +17,8 @@ http:location(help, root(help), []).
 http:location(admin, root(admin), []).
 /* http:location(api, root(api), []).
 http:location(api1, api(v1), []). */
-http:location(funcionarios, funcionarios, []).
+http:location(cadastro, admin(cadastro), []).
+http:location(funcionarios, cadastro(funcionarios), []).
 
 
 :- http_handler(css(.),
@@ -37,6 +38,10 @@ http:location(funcionarios, funcionarios, []).
 :- http_handler(about(.), about, []).
 :- http_handler(help(.), help, []).
 :- http_handler(admin(home), homeAdmin, []).
+:- http_handler(admin(about), aboutAdmin, []).
+:- http_handler(admin(help), helpAdmin, []).
+
+
 
 :- http_handler(funcionarios(cadastro),
                     cadastro, []).

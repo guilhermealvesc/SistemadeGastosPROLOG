@@ -71,6 +71,8 @@ user:file_search_path(tables,  db(tables)).
                 service(relatorio),*/
                 %carregando admin
                 admin(home),
+                admin(about),
+                admin(help),
                 /* clientes(cadastro),
                 clientes(relatorio), */
                 funcionarios(cadastro)

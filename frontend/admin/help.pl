@@ -3,34 +3,37 @@
 
 :- ensure_loaded('./template/bootstrap.pl').
 
-help(_Pedido) :-
+helpAdmin(_Pedido) :-
     reply_html_page(
         bootstrap,
-        [ \metasHelp, \linksHelp, title('Controle de Gastos de Clientes') ],
-        [ \navbarHelp, \help , \scriptHelp]).
+        [ \metasHelpAdmin, \linksHelpAdmin, title('Controle de Gastos de Clientes') ],
+        [ \navbarHelpAdmin, \adminHelp , \scriptHelpAdmin]).
 
-metasHelp -->
+metasHelpAdmin -->
   html(meta([name(viewport), content('width=device-width, initial-scale=1.0, shrink-to-fit=no')], [])).
 
-linksHelp -->
+linksHelpAdmin -->
   html([link([rel(stylesheet), href('https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css')], []),
   link([rel(stylesheet), href('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'), 
   integrity('sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z'), crossorigin('anonymous')], []),
   link([rel(stylesheet), href('/css/help.css')], []),
   script([src('https://use.fontawesome.com/65acd3825f.js')], [])]).
 
-navbarHelp --> 
+navbarHelpAdmin --> 
     html(nav([class('navbar navbar-expand-lg navbar-light bg-light')], 
     [button([class('navbar-toggler'), type(button), 'data-toogle'(collapse), 'data-target'('#navbarNavAltMarkup'), 'aria-controls'('navbarNavAltMarkup'),
     'aria-expanded'(false), 'aria-label'('Toggle navigation')], [span([class('navbar-toggler-icon')], [])]), 
     div([class('collapse navbar-collapse'), id('navbarNavAltMarkup')],
     [div([class('navbar-nav')], [
-        a([class('nav-link'), href('/serviceorder')], ['Ordem de Servico']), 
-        a([class('nav-link'), href('/about')], ['Sobre']), 
-        a([class('nav-link active'), href('/help')], ['Ajuda'])
+        a([class('nav-link'), href('/admin/cadastros')], ['Cadastros']), 
+        a([class('nav-link'), href('/admin/material')], ['Material']), 
+        a([class('nav-link'), href('/admin/serviceorder')], ['Ordem de Servico']), 
+        a([class('nav-link'), href('/admin/consultas')], ['Consultas']), 
+        a([class('nav-link'), href('/admin/about')], ['Sobre']), 
+        a([class('nav-link active'), href('/admin/help')], ['Ajuda'])
     ])])])).
 
-help -->
+adminHelp -->
   html(div([class('main-content')], [
       img([class('logo img-fluid'), src('/img/logo.png'), alt('Logo Sistema')], []),
       p(['Este aplicativo, visa maior agilidade e confiabilidade entre os envolvidos.']),
@@ -118,5 +121,5 @@ help -->
       ])
   ])).
 
-scriptHelp -->
+scriptHelpAdmin -->
     html(script([src('/js/help.js')], [])).

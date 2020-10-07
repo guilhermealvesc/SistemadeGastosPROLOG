@@ -26,10 +26,10 @@ navbarHomeAdmin -->
     [div([class('navbar-nav')], [
         a([class('nav-link'), href('/admin/cadastros')], ['Cadastros']), 
         a([class('nav-link'), href('/admin/material')], ['Material']), 
-        a([class('nav-link'), href('/serviceorder')], ['Ordem de Servico']), 
+        a([class('nav-link'), href('/admin/serviceorder')], ['Ordem de Servico']), 
         a([class('nav-link'), href('/admin/consultas')], ['Consultas']), 
-        a([class('nav-link'), href('/about')], ['Sobre']), 
-        a([class('nav-link'), href('/help')], ['Ajuda'])
+        a([class('nav-link'), href('/admin/about')], ['Sobre']), 
+        a([class('nav-link'), href('/admin/help')], ['Ajuda'])
     ])])])).
 
 homeAdmin -->
