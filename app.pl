@@ -73,8 +73,8 @@ user:file_search_path(tables,  db(tables)).
                 admin(home),
                 admin(about),
                 admin(help),
-                /* clientes(cadastro),
-                clientes(relatorio), */
+                clientes(cadastro),
+                clientes(relatorio),
                 funcionarios(cadastro)
                 /* funcionarios(relatorio),
                 funcoes(cadastro),

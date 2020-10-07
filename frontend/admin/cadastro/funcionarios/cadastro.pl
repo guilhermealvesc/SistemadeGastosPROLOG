@@ -4,7 +4,7 @@
 :- ensure_loaded(temp(bootstrap)).
 :- use_module('./backend/db/schemas/funcionario.pl').
 
-cadastro(_):-
+funcionariosCadastro(_):-
     reply_html_page(
         bootstrap,
         [ title('Controle de Gastos de Clientes | Funcionario'), \html_requires(css('admin/cadastros/funcionarios/cadastro.css'))],
@@ -15,13 +15,13 @@ navbarCadFun -->
     [button([class('navbar-toggler'), type(button), 'data-toogle'(collapse), 'data-target'('#header'), 'aria-controls'(header),
     'aria-expanded'(false), 'aria-label'('Toggle navigation')], [span([class('navbar-toggler-icon')], [])]), 
     div([class('collapse navbar-collapse'), id(header)],
-    [div([class('navbar-nav')], 
-    [a([class('nav-link'), href('./cadastros')], ['Cadastros']), 
-        a([class('nav-link'), href('./material')], ['Material']), 
-        a([class('nav-link'), href('./ordemservico')], ['Ordem de Servico']), 
-        a([class('nav-link'), href('./consultas')], ['Consultas']), 
-        a([class('nav-link'), href('./sobre')], ['Sobre']), 
-        a([class('nav-link'), href('./ajuda')], ['Ajuda'])
+    [div([class('navbar-nav')], [
+        a([class('nav-link'), href('/admin/cadastros')], ['Cadastros']), 
+        a([class('nav-link'), href('/admin/material')], ['Material']), 
+        a([class('nav-link'), href('/admin/serviceorder')], ['Ordem de Servico']), 
+        a([class('nav-link'), href('/admin/consultas')], ['Consultas']), 
+        a([class('nav-link'), href('/admin/about')], ['Sobre']), 
+        a([class('nav-link'), href('/admin/help')], ['Ajuda'])
     ])])])).
 
 pageCadFun -->
@@ -116,8 +116,8 @@ navpageCadFun -->
     'aria-expanded'(false), 'aria-label'('Toggle navigation')], [span([class('navbar-toggler-icon')], [])]), 
     div([class('collapse navbar-collapse'), id(page)],
     [div([class('navbar-nav')], 
-    [a([class('nav-link'), href('./relatorio')], ['Relatorio']), 
-    a([class('nav-link'), href('./cadastro')], ['Cadastro']) 
+    [a([class('nav-link'), href('/admin/cadastros')], ['Relatorio']), 
+    a([class('nav-link'), href('/admin/cadastros')], ['Cadastro']) 
     ])])])).
 
 buttonsCadFun --> 

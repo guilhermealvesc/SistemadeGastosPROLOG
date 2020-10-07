@@ -14,10 +14,13 @@ http:location(img, root(img), []).
 http:location(home, root(home), []).
 http:location(about, root(about), []).
 http:location(help, root(help), []).
+http:location(serviceorder, root(serviceorder), []).
 http:location(admin, root(admin), []).
 /* http:location(api, root(api), []).
 http:location(api1, api(v1), []). */
 http:location(cadastro, admin(cadastro), []).
+
+http:location(clientes, cadastro(clientes), []).
 http:location(funcionarios, cadastro(funcionarios), []).
 
 
@@ -31,13 +34,26 @@ http:location(funcionarios, cadastro(funcionarios), []).
                 http_reply_file(dir_img('favicon.ico'), []), []).
 
 % Frontend
+
+% Home %
 :- http_handler(root(.),
                 login(Metodo), [method(Metodo), methods([get, post])]).
 
 :- http_handler(home(.), home, []).
 :- http_handler(about(.), about, []).
 :- http_handler(help(.), help, []).
+
+% Admin %
 :- http_handler(admin(home), homeAdmin, []).
+
+:- http_handler(clientes(.), clientes, []).
+:- http_handler(clientes(cadastro), 
+                clientesCadastro(Metodo), [method(Metodo), methods([get, post])]).
+
+:- http_handler(funcionarios(.), funcionarios, []).
+:- http_handler(funcionarios(cadastro), 
+                funcionariosCadastro(Metodo), [method(Metodo), methods([get, post])]).
+
 :- http_handler(admin(about), aboutAdmin, []).
 :- http_handler(admin(help), helpAdmin, []).
 
