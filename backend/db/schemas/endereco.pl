@@ -16,15 +16,15 @@
         tel1:atom,
         tem2:atom).
 
-arquivo_da_tabela(Arquivo):-
-    db_attach(Arquivo, []),
-    at_halt(db_sync(gc(always))).
+:- initialization( ( db_attach('./backend/db/tables/tbl_endereco.pl', []),
+    at_halt(db_sync(gc(always))) )).
+
 
 insere(CdEnd, Nm_rua, Nr_casa, Complemento, Nm_bairro, 
         Nm_cidade, Cep, Tel1, Tel2) :-
-    chave:pk(endereco, CdEnd),
         with_mutex(enderecos, 
-            assert_endereco(CdEnd, Nm_rua, Nr_casa, Complemento, Nm_bairro, Nm_cidade, Cep, Tel1, Tel2)).
+            (chave:pk(endereco, CdEnd),
+            assert_endereco(CdEnd, Nm_rua, Nr_casa, Complemento, Nm_bairro, Nm_cidade, Cep, Tel1, Tel2))).
 
 remove(CdEnd) :- 
     with_mutex(enderecos, 

@@ -3,8 +3,16 @@
 
 :- ensure_loaded(temp(bootstrap)).
 :- use_module('./backend/db/schemas/funcionario.pl').
+:- use_module('./backend/db/schemas/funcao.pl').
+:- use_module('./backend/db/schemas/endereco.pl').
 
-funcionariosCadastro(_):-
+funcionariosCadastro(post, Pedido):-
+    reply_html_page(
+        bootstrap,
+        [ \metasCadFun, \linksCadFun, title('Controle de Gastos de Clientes | Funcionario')],
+        [ \navbarCadFun, \pageCadFun(Pedido) ]).
+
+funcionariosCadastro(get, _Pedido):-
     reply_html_page(
         bootstrap,
         [ \metasCadFun, \linksCadFun, title('Controle de Gastos de Clientes | Funcionario')],
@@ -33,6 +41,193 @@ navbarCadFun -->
         a([class('nav-link'), href('/admin/help')], ['Ajuda'])
     ])])])).
 
+pageCadFun(Pedido) -->
+    {
+        catch(
+            http_parameters(Pedido, [
+                nome(Nome, [atom, length > 0]),
+                user(User, [atom, length > 0]),
+                password(Pass, [atom, length > 0]),
+                func(Func, [number, integer]),
+                address(Rua, [atom, length > 0]),
+                addressnum(Numrua, [number, integer]),
+                comp(Complemento, [atom, length > 0]),
+                bairro(Bairro, [atom, length > 0]),
+                city(City, [atom, length > 0]),
+                cep(Cep, [atom, length > 0]),
+                tel1(Tel1, [atom, length > 0]),
+                tel2(Tel2, [atom, length > 0])
+            ]), 
+        _E, fail), !,
+        cadastra_funcionario(CdFun, Nome, User, Pass, Func, Rua, Numrua, 
+            Complemento, Bairro, City, Cep, Tel1, Tel2)
+    },
+    html(div([class('main-content')],
+            [h5('Funcionario'), 
+            \navpageCadFun,
+            div([class('row info')], [
+                div([class('col-lg-10 col-md-10')], [
+                    div([class(search)], [
+                        form([method(get)], [
+                            label([for(type)], 'Pesquisar: '),
+                            select([name(type), id(type)], [
+                                option([value(material)], 'Funcionario'),
+                                option([value(estoque)], 'Usuario'),
+                                option([value(servico)], 'Funcao')
+                            ]),
+                            input([type(text)], []),
+                            input([type(button), value('Buscar')], [])
+                        ])
+                    ]),
+                    h6('Cadastro Realizado com sucesso!'),
+                    h6('O codigo cadastrado e ~w!' - CdFun),
+                    form([method('post'), action('./cadastro')], [
+                        div([class('form-group')], [
+                            label([for(nome)], 'Nome'),
+                            input([name(nome), type(text), class('form-control'), id(nome), placeholder('')], [])
+                        ]),
+                        div([class('form-group')], [
+                            label([for(usuario)], 'Usuario'),
+                            input([name(user) ,type(text), class('form-control'), id(usuario), placeholder('')], [])
+                        ]),
+                        div([class('form-group')], [
+                            label([for(senha)], 'Senha'),
+                            input([name(password), type(password), class('form-control'), id(senha), placeholder('')], [])
+                        ]),
+                        div([class('form-group')], [
+                            label([for(inputState)], 'Funcao'),
+                            select([name(func), id('inputState'), class('form-control')], [
+                                \renderFuncs
+                            ]),
+                            hr([]),
+                            div([class(row)], [
+                                div([class(col)], [
+                                    label([for(rua)], 'Rua'),
+                                    input([name(address), type(text), class('form-control'), id(rua), placeholder('')], [])
+                                ]),
+                                div([class(col)], [
+                                    label([for(numero)], 'Numero'),
+                                    input([name(addressnum) ,type(number), class('form-control'), id(numero), placeholder('')], [])
+                                ])
+                            ]),
+                            label([for(complemento)], 'Complemento'),
+                            input([name(comp), type(text), class('form-control'), id(complemento), placeholder('')], []),
+                            div([class(row)], [
+                                div([class(col)], [
+                                    label([for(bairro)], 'Bairro'),
+                                    input([name(bairro), type(text), class('form-control'), id(bairro), placeholder('')], [])
+                                ]),
+                                div([class(col)], [
+                                    label([for(cidade)], 'Cidade'),
+                                    input([name(city), type(text), class('form-control'), id(cidade), placeholder('')], [])
+                                ])
+                            ]),
+                            div([class(row)], [
+                                div([class(col)], [
+                                    label([for(cep)], 'CEP'),
+                                    input([name(cep), type(text), class('form-control'), id(cep), placeholder('')], [])
+                                ])
+                            ]),
+                            div([class(row)], [
+                                div([class(col)], [
+                                    label([for(telefone1)], 'Telefone 1'),
+                                    input([name(tel1), type(text), class('form-control'), id(telefone1), placeholder('')], [])
+                                ]),
+                                div([class(col)], [
+                                    label([for(telefone2)], 'Telefone 2'),
+                                    input([name(tel2), type(text), class('form-control'), id(telefone2), placeholder('')], [])
+                                ])
+                            ])
+                        ]),
+                        button([type(submit), class('btn btn-light')], 'Submit')
+                    ])
+                ]),
+                \buttonsCadFun
+            ])])).
+
+pageCadFun(_Pedido) -->
+    html(div([class('main-content')],
+            [h5('Funcionario'), 
+            \navpageCadFun,
+            div([class('row info')], [
+                div([class('col-lg-10 col-md-10')], [
+                    div([class(search)], [
+                        form([method(get)], [
+                            label([for(type)], 'Pesquisar: '),
+                            select([name(type), id(type)], [
+                                option([value(material)], 'Funcionario'),
+                                option([value(estoque)], 'Usuario'),
+                                option([value(servico)], 'Funcao')
+                            ]),
+                            input([type(text)], []),
+                            input([type(button), value('Buscar')], [])
+                        ])
+                    ]),
+                    h5('Nao foi possivel realizar o cadastro!'),
+                    form([method('post'), action('./cadastro')], [
+                        div([class('form-group')], [
+                            label([for(nome)], 'Nome'),
+                            input([name(nome), type(text), class('form-control'), id(nome), placeholder('')], [])
+                        ]),
+                        div([class('form-group')], [
+                            label([for(usuario)], 'Usuario'),
+                            input([name(user) ,type(text), class('form-control'), id(usuario), placeholder('')], [])
+                        ]),
+                        div([class('form-group')], [
+                            label([for(senha)], 'Senha'),
+                            input([name(password), type(password), class('form-control'), id(senha), placeholder('')], [])
+                        ]),
+                        div([class('form-group')], [
+                            label([for(inputState)], 'Funcao'),
+                            select([name(func), id('inputState'), class('form-control')], [
+                                \renderFuncs
+                            ]),
+                            hr([]),
+                            div([class(row)], [
+                                div([class(col)], [
+                                    label([for(rua)], 'Rua'),
+                                    input([name(address), type(text), class('form-control'), id(rua), placeholder('')], [])
+                                ]),
+                                div([class(col)], [
+                                    label([for(numero)], 'Numero'),
+                                    input([name(addressnum) ,type(number), class('form-control'), id(numero), placeholder('')], [])
+                                ])
+                            ]),
+                            label([for(complemento)], 'Complemento'),
+                            input([name(comp), type(text), class('form-control'), id(complemento), placeholder('')], []),
+                            div([class(row)], [
+                                div([class(col)], [
+                                    label([for(bairro)], 'Bairro'),
+                                    input([name(bairro), type(text), class('form-control'), id(bairro), placeholder('')], [])
+                                ]),
+                                div([class(col)], [
+                                    label([for(cidade)], 'Cidade'),
+                                    input([name(city), type(text), class('form-control'), id(cidade), placeholder('')], [])
+                                ])
+                            ]),
+                            div([class(row)], [
+                                div([class(col)], [
+                                    label([for(cep)], 'CEP'),
+                                    input([name(cep), type(text), class('form-control'), id(cep), placeholder('')], [])
+                                ])
+                            ]),
+                            div([class(row)], [
+                                div([class(col)], [
+                                    label([for(telefone1)], 'Telefone 1'),
+                                    input([name(tel1), type(text), class('form-control'), id(telefone1), placeholder('')], [])
+                                ]),
+                                div([class(col)], [
+                                    label([for(telefone2)], 'Telefone 2'),
+                                    input([name(tel2), type(text), class('form-control'), id(telefone2), placeholder('')], [])
+                                ])
+                            ])
+                        ]),
+                        button([type(submit), class('btn btn-light')], 'Submit')
+                    ])
+                ]),
+                \buttonsCadFun
+            ])])).
+
 pageCadFun -->
     html(div([class('main-content')],
             [h5('Funcionario'), 
@@ -51,7 +246,7 @@ pageCadFun -->
                             input([type(button), value('Buscar')], [])
                         ])
                     ]),
-                    form([method('post'), action('/cadfun')], [
+                    form([method('post'), action('./cadastro')], [
                         div([class('form-group')], [
                             label([for(nome)], 'Nome'),
                             input([name(nome), type(text), class('form-control'), id(nome), placeholder('')], [])
@@ -67,11 +262,7 @@ pageCadFun -->
                         div([class('form-group')], [
                             label([for(inputState)], 'Funcao'),
                             select([name(func), id('inputState'), class('form-control')], [
-                                option([value(1), selected], 'Administrador'),
-                                option([value(2)], 'Balconista'),
-                                option([value(3)], 'Bolsista'),
-                                option([value(4)], 'Gerente'),
-                                option([value(5)], 'Motoboy')
+                                \renderFuncs
                             ]),
                             hr([]),
                             div([class(row)], [
@@ -138,3 +329,18 @@ buttonsCadFun -->
         button([class('btn btn-light')], '- Excluir'),
         button([class('btn btn-light')], '? Ajudar')
     ])).
+
+renderFuncs --> 
+    {
+        findall(option([value(Id)], DescFunc), funcao:funcao(Id, DescFunc, _), HTML)
+    }, 
+    html(HTML).
+
+
+cadastra_funcionario(CdFun, Nome, Usuario, Senha, CdFuncao, Rua, Nr_casa, 
+    Complemento, Bairro, Cidade, CEP, Tel1, Tel2) :-
+        funcao:funcao(CdFuncao, _, TpVis),
+        endereco:insere(CdEnd, Rua, Nr_casa, 
+            Complemento, Bairro, Cidade, CEP, Tel1, Tel2),
+        funcionario:insere(CdFun, CdFuncao, CdEnd, Nome, 
+            Senha, Usuario, TpVis).
