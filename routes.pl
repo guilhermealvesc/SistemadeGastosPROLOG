@@ -64,7 +64,4 @@ http:location(funcoes, cadastros(funcoes), []).
 
 
 % Backend
-/* :- http_handler( api1(bookmarks/Id),
-                 bookmarks(Metodo, Id) ,
-                 [ method(Metodo),
-                   methods([ get, post, put, delete ]) ]). */
+

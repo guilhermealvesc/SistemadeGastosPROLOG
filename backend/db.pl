@@ -37,10 +37,6 @@ atualiza_funcionario(CdFun, Nome, Usuario, Senha, Func, Rua, Nr_casa,
         funcionario:atualiza(CdFun, CdFuncao, CdEnd, Nome, 
             Senha, Usuario, TpVis).
 
-listar_funcionarios(List) :-
-    findall((Name, Nick, Funcao), 
-        (funcionario:funcionario(_CdFunc, CdFuncao, _CdEnd, Name, _Senha, Nick, _),
-        funcao:funcao(CdFuncao, Funcao, _)), List).
 /* ENDEREÇO (CONSULTAS E CRUD) A tabela de endereçoes está subordinada a de funcionários e clientes */
 /* FUNCIONÁRIOS (CONSULTAS E CRUD) */
 

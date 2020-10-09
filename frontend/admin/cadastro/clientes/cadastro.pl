@@ -3,7 +3,6 @@
 
 :- ensure_loaded(temp(bootstrap)).
 :- use_module('./backend/db/schemas/cliente.pl').
-/* :- use_module('./backend/db/schemas/funcao.pl'). */
 :- use_module('./backend/db/schemas/endereco.pl').
 
 clientesCadastro(post, Pedido):-
@@ -45,10 +44,11 @@ pageCadCliente(Pedido) -->
     {
         catch(
             http_parameters(Pedido, [
+                rzsocial(Rzsocial, [atom, length > 0]),
                 nome(Nome, [atom, length > 0]),
-                user(User, [atom, length > 0]),
-                password(Pass, [atom, length > 0]),
-                func(Func, [number, integer]),
+                type(Tipo, [atom, length > 0]),
+                cod(Cnpj, [atom, length > 0]),
+                email(Email, [atom, length > 0]),
                 address(Rua, [atom, length > 0]),
                 addressnum(Numrua, [number, integer]),
                 comp(Complemento, [atom, length > 0]),
@@ -59,11 +59,11 @@ pageCadCliente(Pedido) -->
                 tel2(Tel2, [atom, length > 0])
             ]), 
         _E, fail), !,
-        cadastra_funcionario(CdFun, Nome, User, Pass, Func, Rua, Numrua, 
+        cadastra_cliente(CdCliente, Rzsocial, Nome, Tipo, Cnpj, Email, Rua, Numrua, 
             Complemento, Bairro, City, Cep, Tel1, Tel2)
     },
     html(div([class('main-content')],
-            [h5('Funcionario'), 
+            [h5('Cliente'), 
             \navpageCadCliente,
             div([class('row info')], [
                 div([class('col-lg-10 col-md-10')], [
@@ -71,8 +71,8 @@ pageCadCliente(Pedido) -->
                         form([method(get)], [
                             label([for(type)], 'Pesquisar: '),
                             select([name(type), id(type)], [
-                                option([value(material)], 'Funcionario'),
                                 option([value(estoque)], 'Usuario'),
+                                option([value(material)], 'Funcionario'),
                                 option([value(servico)], 'Funcao')
                             ]),
                             input([type(text)], []),
@@ -80,7 +80,7 @@ pageCadCliente(Pedido) -->
                         ])
                     ]),
                     h6('Cadastro Realizado com sucesso!'),
-                    h6('O codigo cadastrado e ~w!' - CdFun),
+                    h6('O codigo cadastrado e ~w!' - CdCliente),
                     form([method('post'), action('./cadastro')], [
                         div([class('form-group')], [
                             label([for(rzsocial)], 'Razao Social'),
@@ -91,12 +91,15 @@ pageCadCliente(Pedido) -->
                             input([name(nome), type(text), class('form-control'), id(nome), placeholder('')], [])
                         ]),
                         div([class('form-group')], [
-                            label([for(usuario)], 'Usuario'),
-                            input([name(user) ,type(text), class('form-control'), id(usuario), placeholder('')], [])
+                            label([for(usuario)], 'Tipo Pessoa'),
+                            select([name(type)], [
+                                option([value(juridica)], 'Juridica'),
+                                option([value(fisica)], 'Fisica')
+                            ])
                         ]),
                         div([class('form-group')], [
-                            label([for(senha)], 'Senha'),
-                            input([name(password), type(password), class('form-control'), id(senha), placeholder('')], [])
+                            label([for(cod)], 'CNPJ/CPF'),
+                            input([name(cod), type(text), class('form-control'), id(cod), placeholder('')], [])
                         ]),
                         div([class('form-group')], [
                             label([for(inputState)], 'E-mail'),
@@ -149,7 +152,7 @@ pageCadCliente(Pedido) -->
 
 pageCadCliente(_Pedido) -->
     html(div([class('main-content')],
-            [h5('Funcionario'), 
+            [h5('Cliente'), 
             \navpageCadCliente,
             div([class('row info')], [
                 div([class('col-lg-10 col-md-10')], [
@@ -157,8 +160,8 @@ pageCadCliente(_Pedido) -->
                         form([method(get)], [
                             label([for(type)], 'Pesquisar: '),
                             select([name(type), id(type)], [
-                                option([value(material)], 'Funcionario'),
                                 option([value(estoque)], 'Usuario'),
+                                option([value(material)], 'Funcionario'),
                                 option([value(servico)], 'Funcao')
                             ]),
                             input([type(text)], []),
@@ -176,12 +179,15 @@ pageCadCliente(_Pedido) -->
                             input([name(nome), type(text), class('form-control'), id(nome), placeholder('')], [])
                         ]),
                         div([class('form-group')], [
-                            label([for(usuario)], 'Usuario'),
-                            input([name(user) ,type(text), class('form-control'), id(usuario), placeholder('')], [])
+                            label([for(usuario)], 'Tipo Pessoa'),
+                            select([name(type)], [
+                                option([value(juridica)], 'Juridica'),
+                                option([value(fisica)], 'Fisica')
+                            ])
                         ]),
                         div([class('form-group')], [
-                            label([for(senha)], 'Senha'),
-                            input([name(password), type(password), class('form-control'), id(senha), placeholder('')], [])
+                            label([for(cod)], 'CNPJ/CPF'),
+                            input([name(cod), type(text), class('form-control'), id(cod), placeholder('')], [])
                         ]),
                         div([class('form-group')], [
                             label([for(inputState)], 'E-mail'),
@@ -234,7 +240,7 @@ pageCadCliente(_Pedido) -->
 
 pageCadCliente -->
     html(div([class('main-content')],
-            [h5('Funcionario'), 
+            [h5('Cliente'), 
             \navpageCadCliente,
             div([class('row info')], [
                 div([class('col-lg-10 col-md-10')], [
@@ -242,8 +248,8 @@ pageCadCliente -->
                         form([method(get)], [
                             label([for(type)], 'Pesquisar: '),
                             select([name(type), id(type)], [
-                                option([value(material)], 'Funcionario'),
                                 option([value(estoque)], 'Usuario'),
+                                option([value(material)], 'Funcionario'),
                                 option([value(servico)], 'Funcao')
                             ]),
                             input([type(text)], []),
@@ -260,12 +266,15 @@ pageCadCliente -->
                             input([name(nome), type(text), class('form-control'), id(nome), placeholder('')], [])
                         ]),
                         div([class('form-group')], [
-                            label([for(usuario)], 'Usuario'),
-                            input([name(user) ,type(text), class('form-control'), id(usuario), placeholder('')], [])
+                            label([for(usuario)], 'Tipo Pessoa'),
+                            select([name(type)], [
+                                option([value(juridica)], 'Juridica'),
+                                option([value(fisica)], 'Fisica')
+                            ])
                         ]),
                         div([class('form-group')], [
-                            label([for(senha)], 'Senha'),
-                            input([name(password), type(password), class('form-control'), id(senha), placeholder('')], [])
+                            label([for(cod)], 'CNPJ/CPF'),
+                            input([name(cod), type(text), class('form-control'), id(cod), placeholder('')], [])
                         ]),
                         div([class('form-group')], [
                             label([for(inputState)], 'E-mail'),
@@ -322,8 +331,8 @@ navpageCadCliente -->
     'aria-expanded'(false), 'aria-label'('Toggle navigation')], [span([class('navbar-toggler-icon')], [])]), 
     div([class('collapse navbar-collapse'), id(page)],
     [div([class('navbar-nav')], 
-    [a([class('nav-link'), href('/admin/cadastros/funcionarios')], ['Relatorio']), 
-    a([class('nav-link active'), href('/admin/cadastros/funcionarios/cadastro')], ['Cadastro']) 
+    [a([class('nav-link'), href('/admin/cadastros/clientes')], ['Relatorio']), 
+    a([class('nav-link active'), href('/admin/cadastros/clientes/cadastro')], ['Cadastro']) 
     ])])])).
 
 buttonsCadCliente --> 
