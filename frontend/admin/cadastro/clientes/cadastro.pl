@@ -8,13 +8,13 @@
 clientesCadastro(post, Pedido):-
     reply_html_page(
         bootstrap,
-        [ \metasCadCliente, \linksCadCliente, title('Controle de Gastos de Clientes | Clientes')],
+        [ \metasCadCliente, \linksCadCliente, title('Controle de Gastos de Clientes | Cliente')],
         [ \navbarCadCliente, \pageCadCliente(Pedido) ]).
 
 clientesCadastro(get, _Pedido):-
     reply_html_page(
         bootstrap,
-        [ \metasCadCliente, \linksCadCliente, title('Controle de Gastos de Clientes | Clientes')],
+        [ \metasCadCliente, \linksCadCliente, title('Controle de Gastos de Clientes | Cliente')],
         [ \navbarCadCliente, \pageCadCliente ]).
 
 metasCadCliente -->
@@ -24,7 +24,7 @@ linksCadCliente -->
     html([link([rel(stylesheet), href('https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css')], []),
     link([rel(stylesheet), href('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'), 
     integrity('sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z'), crossorigin('anonymous')], []),
-    link([rel(stylesheet), href('/css/admin/cadastros/funcionarios/cadastro.css')], [])]).
+    link([rel(stylesheet), href('/css/admin/cadastros/clientes/cadastro.css')], [])]).
 
 navbarCadCliente --> 
     html(nav([class('navbar navbar-expand-lg navbar-light bg-light')], 
