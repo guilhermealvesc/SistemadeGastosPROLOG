@@ -1,1 +1,2 @@
-created(1602085751.615733).
+created(1602207380.931064).
+assert(chave(funcao,5)).

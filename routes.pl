@@ -18,10 +18,11 @@ http:location(serviceorder, root(serviceorder), []).
 http:location(admin, root(admin), []).
 /* http:location(api, root(api), []).
 http:location(api1, api(v1), []). */
-http:location(cadastro, admin(cadastro), []).
+http:location(cadastros, admin(cadastros), []).
 
-http:location(clientes, cadastro(clientes), []).
-http:location(funcionarios, cadastro(funcionarios), []).
+http:location(clientes, cadastros(clientes), []).
+http:location(funcionarios, cadastros(funcionarios), []).
+http:location(funcoes, cadastros(funcoes), []).
 
 
 :- http_handler(css(.),
@@ -54,13 +55,14 @@ http:location(funcionarios, cadastro(funcionarios), []).
 :- http_handler(funcionarios(cadastro), 
                 funcionariosCadastro(Metodo), [method(Metodo), methods([get, post])]).
 
+:- http_handler(funcoes(.), funcoes, []).
+:- http_handler(funcoes(cadastro), 
+                funcoesCadastro(Metodo), [method(Metodo), methods([get, post])]).
+
 :- http_handler(admin(about), aboutAdmin, []).
 :- http_handler(admin(help), helpAdmin, []).
 
 
-
-:- http_handler(funcionarios(cadastro),
-                    cadastro, []).
 % Backend
 /* :- http_handler( api1(bookmarks/Id),
                  bookmarks(Metodo, Id) ,

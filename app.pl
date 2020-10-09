@@ -75,9 +75,9 @@ user:file_search_path(tables,  db(tables)).
                 admin(help),
                 clientes(cadastro),
                 clientes(relatorio),
-                funcionarios(cadastro)
-                /* funcionarios(relatorio),
-                funcoes(cadastro),
+                funcionarios(cadastro),
+                funcionarios(relatorio)
+                /* funcoes(cadastro),
                 funcoes(relatorio),
                 consultas(mensal),
                 consultas(servicos),

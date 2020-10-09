@@ -24,7 +24,7 @@ navbarHomeAdmin -->
     'aria-expanded'(false), 'aria-label'('Toggle navigation')], [span([class('navbar-toggler-icon')], [])]), 
     div([class('collapse navbar-collapse'), id('navbarNavAltMarkup')],
     [div([class('navbar-nav')], [
-        a([class('nav-link'), href('/admin/cadastros')], ['Cadastros']), 
+        a([class('nav-link'), href('/admin/cadastros/funcionarios')], ['Cadastros']), 
         a([class('nav-link'), href('/admin/material')], ['Material']), 
         a([class('nav-link'), href('/admin/serviceorder')], ['Ordem de Servico']), 
         a([class('nav-link'), href('/admin/consultas')], ['Consultas']), 

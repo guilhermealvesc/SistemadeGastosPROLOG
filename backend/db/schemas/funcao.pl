@@ -10,14 +10,13 @@
         ds_funcao:atom,
         tp_visivel:boolean).
 
-arquivo_da_tabela(Arquivo):-
-    db_attach(Arquivo, []),
-    at_halt(db_sync(gc(always))).
+:- initialization( ( db_attach('./backend/db/tables/tbl_funcao.pl', []),
+    at_halt(db_sync(gc(always))) )).
 
 insere(CdFuncao, Ds_funcao, TpVis) :-
-    chave:pk(funcao, CdFuncao),
     with_mutex(funcoes, 
-        assert_funcao(CdFuncao, Ds_funcao, TpVis)).
+        (chave:pk(funcao, CdFuncao),
+        assert_funcao(CdFuncao, Ds_funcao, TpVis))).
 
 remove(CdFuncao) :- 
     with_mutex(funcoes, 

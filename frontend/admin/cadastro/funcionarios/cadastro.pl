@@ -7,8 +7,17 @@
 funcionariosCadastro(_):-
     reply_html_page(
         bootstrap,
-        [ title('Controle de Gastos de Clientes | Funcionario'), \html_requires(css('admin/cadastros/funcionarios/cadastro.css'))],
+        [ \metasCadFun, \linksCadFun, title('Controle de Gastos de Clientes | Funcionario')],
         [ \navbarCadFun, \pageCadFun ]).
+
+metasCadFun -->
+    html(meta([name(viewport), content('width=device-width, initial-scale=1.0, shrink-to-fit=no')], [])).
+    
+linksCadFun -->
+    html([link([rel(stylesheet), href('https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css')], []),
+    link([rel(stylesheet), href('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'), 
+    integrity('sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z'), crossorigin('anonymous')], []),
+    link([rel(stylesheet), href('/css/admin/cadastros/funcionarios/cadastro.css')], [])]).
 
 navbarCadFun --> 
     html(nav([class('navbar navbar-expand-lg navbar-light bg-light')], 
@@ -16,7 +25,7 @@ navbarCadFun -->
     'aria-expanded'(false), 'aria-label'('Toggle navigation')], [span([class('navbar-toggler-icon')], [])]), 
     div([class('collapse navbar-collapse'), id(header)],
     [div([class('navbar-nav')], [
-        a([class('nav-link'), href('/admin/cadastros')], ['Cadastros']), 
+        a([class('nav-link active'), href('/admin/cadastros/funcionarios')], ['Cadastros']), 
         a([class('nav-link'), href('/admin/material')], ['Material']), 
         a([class('nav-link'), href('/admin/serviceorder')], ['Ordem de Servico']), 
         a([class('nav-link'), href('/admin/consultas')], ['Consultas']), 
@@ -116,8 +125,8 @@ navpageCadFun -->
     'aria-expanded'(false), 'aria-label'('Toggle navigation')], [span([class('navbar-toggler-icon')], [])]), 
     div([class('collapse navbar-collapse'), id(page)],
     [div([class('navbar-nav')], 
-    [a([class('nav-link'), href('/admin/cadastros')], ['Relatorio']), 
-    a([class('nav-link'), href('/admin/cadastros')], ['Cadastro']) 
+    [a([class('nav-link'), href('/admin/cadastros/funcionarios')], ['Relatorio']), 
+    a([class('nav-link active'), href('/admin/cadastros/funcionarios/cadastro')], ['Cadastro']) 
     ])])])).
 
 buttonsCadFun --> 
