@@ -73,10 +73,10 @@ user:file_search_path(tables,  db(tables)).
                 clientes(cadastro),
                 clientes(relatorio),
                 funcionarios(cadastro),
-                funcionarios(relatorio)
-                /* funcoes(cadastro),
-                funcoes(relatorio),
-                consultas(mensal),
+                funcionarios(relatorio),
+                funcoes(cadastro),
+                funcoes(relatorio)
+                /* consultas(mensal),
                 consultas(servicos),
                 estoque(cadastro),
                 estoque(relatorio),

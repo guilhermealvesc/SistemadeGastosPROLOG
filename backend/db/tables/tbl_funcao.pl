@@ -1,4 +1,4 @@
-created(1602258449.97219).
+created(1602269230.661964).
 assert(funcao(1,'Administrador',true)).
 assert(funcao(2,'Balconista',false)).
 assert(funcao(3,'Bolsista',false)).
