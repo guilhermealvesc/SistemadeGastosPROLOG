@@ -35,7 +35,7 @@ navbarRelFuncao -->
 
 pageRelFuncao -->
     html(div([class('main-content')],
-            [h5('Funcoes'), 
+            [h5('Funcao'), 
             \navpageRelFuncao,
             div([class('row info')], [
                 div([class('col-lg-10 col-md-10')], [
@@ -68,8 +68,8 @@ navpageRelFuncao -->
     'aria-expanded'(false), 'aria-label'('Toggle navigation')], [span([class('navbar-toggler-icon')], [])]), 
     div([class('collapse navbar-collapse'), id(page)],
     [div([class('navbar-nav')], 
-    [a([class('nav-link active'), href('/admin/cadastros/clientes')], ['Relatorio']), 
-    a([class('nav-link'), href('/admin/cadastros/clientes/cadastro')], ['Cadastro']) 
+    [a([class('nav-link active'), href('/admin/cadastros/funcoes')], ['Relatorio']), 
+    a([class('nav-link'), href('/admin/cadastros/funcoes/cadastro')], ['Cadastro']) 
     ])])])).
 
 buttonsRelFuncao --> 

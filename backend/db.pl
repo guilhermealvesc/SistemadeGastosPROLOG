@@ -63,9 +63,6 @@ atualiza_cliente(CdCliente, RazaoS, Nome, Tipo, CodId, Email, Rua, Nr_casa,
             Complemento, Bairro, Cidade, CEP, Tel1, Tel2),
         cliente:atualiza(CdCliente, CdEnd, RazaoS, Nome, Email, CodId, Tipo, TpVis).
 
-listar_clientes(List) :-
-    findall((Name, Email), 
-        cliente:cliente(_CdCliente, _CdEnd, _RazaoS, Name, Email, _CodId, _Tipo, _TpVis), List).
 /* ENDEREÇO (CONSULTAS E CRUD) A tabela de endereçoes está subordinada a de funcionários e clientes */
 /* FUNCIONÁRIOS (CONSULTAS E CRUD) */
 

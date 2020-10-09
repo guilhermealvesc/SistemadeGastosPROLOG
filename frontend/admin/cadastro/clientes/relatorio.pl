@@ -35,7 +35,7 @@ navbarRelCli -->
 
 pageRelCli -->
     html(div([class('main-content')],
-            [h5('Clientes'), 
+            [h5('Cliente'), 
             \navpageRelCli,
             div([class('row info')], [
                 div([class('col-lg-10 col-md-10')], [
