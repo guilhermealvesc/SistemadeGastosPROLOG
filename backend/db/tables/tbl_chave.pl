@@ -1,4 +1,4 @@
-created(1602211038.809814).
+created(1602253697.03792).
 assert(chave(funcao,5)).
-assert(chave(endereco,3)).
-assert(chave(funcionario,3)).
+assert(chave(endereco,4)).
+assert(chave(funcionario,4)).

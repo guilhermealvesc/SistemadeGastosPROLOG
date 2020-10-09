@@ -17,13 +17,13 @@
         tp_visivel:boolean
       ).
 
-:- initialization( ( db_attach(tables('tbl_cliente.pl'), []),
+:- initialization( ( db_attach('./backend/db/tables/tbl_cliente.pl', []),
                     at_halt(db_sync(gc(always))) )).
 
 insere(CdCliente, CdEndereco, NmRazaoSocial, NmFantasia, DsEmail, CodIdentificacao, TipoCliente, TpVis) :-
-    chave:pk(cliente, CdCliente),
-    with_mutex(clientes, 
-        assert_cliente(CdCliente, CdEndereco, NmRazaoSocial, NmFantasia, DsEmail, CodIdentificacao, TipoCliente, TpVis)).
+    with_mutex(clientes,
+        (chave:pk(cliente, CdCliente), 
+        assert_cliente(CdCliente, CdEndereco, NmRazaoSocial, NmFantasia, DsEmail, CodIdentificacao, TipoCliente, TpVis))).
 
 remove(CdCliente) :- 
     with_mutex(clientes, 

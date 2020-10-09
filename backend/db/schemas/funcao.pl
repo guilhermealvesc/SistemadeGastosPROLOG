@@ -26,9 +26,4 @@ atualiza(CdFuncao, Ds_funcao, TpVis) :-
     with_mutex(funcoes,
         retractall_funcao(CdFuncao, _Ds_funcao, _TpVis),
         assert_funcao(CdFuncao, Ds_funcao, TpVis)).
-
-listar(Lista) :-
-    findall((Ds_funcao, Tp_visivel), 
-        funcao:funcao(_CdFuncao, Ds_funcao, Tp_visivel), Lista).
-    
  

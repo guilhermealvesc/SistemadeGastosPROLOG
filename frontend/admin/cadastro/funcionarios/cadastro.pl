@@ -163,7 +163,7 @@ pageCadFun(_Pedido) -->
                             input([type(button), value('Buscar')], [])
                         ])
                     ]),
-                    h5('Nao foi possivel realizar o cadastro!'),
+                    h6('Nao foi possivel realizar o cadastro!'),
                     form([method('post'), action('./cadastro')], [
                         div([class('form-group')], [
                             label([for(nome)], 'Nome'),
@@ -335,12 +335,3 @@ renderFuncs -->
         findall(option([value(Id)], DescFunc), funcao:funcao(Id, DescFunc, _), HTML)
     }, 
     html(HTML).
-
-
-cadastra_funcionario(CdFun, Nome, Usuario, Senha, CdFuncao, Rua, Nr_casa, 
-    Complemento, Bairro, Cidade, CEP, Tel1, Tel2) :-
-        funcao:funcao(CdFuncao, _, TpVis),
-        endereco:insere(CdEnd, Rua, Nr_casa, 
-            Complemento, Bairro, Cidade, CEP, Tel1, Tel2),
-        funcionario:insere(CdFun, CdFuncao, CdEnd, Nome, 
-            Senha, Usuario, TpVis).

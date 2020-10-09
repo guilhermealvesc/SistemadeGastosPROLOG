@@ -1,21 +1,3 @@
-:- load_files([ routes,
-                schemas(cliente),
-                schemas(endereco),
-                schemas(estoque),
-                schemas(fechamento_mes),
-                schemas(funcao),
-                schemas(funcionario),
-                schemas(material_servico),
-                schemas(material),
-                schemas(ordem_servico),
-                schemas(servico_prestado),
-                schemas(servico)
-              ],
-	          [ if(not_loaded), 
-                silent(true) 
-	          ]).
-        
-
 /* FUNÇÃO (CONSULTAS E CRUD) */
 cadastra_funcao(CdFuncao, Ds_funcao, TpVis) :-
     funcao:insere(CdFuncao, Ds_funcao, TpVis).
@@ -26,18 +8,16 @@ remove_funcao(CdFuncao) :-
 atualiza_funcao(CdFuncao, Ds_funcao, TpVis) :-
     funcao:atualiza(CdFuncao, Ds_funcao, TpVis).
 
-listar_funcoes(List) :-
-    funcao:listar(List).
 /* FUNÇÃO (CONSULTAS E CRUD) */
 
 /* FUNCIONÁRIOS (CONSULTAS E CRUD) */
 /* ENDEREÇO (CONSULTAS E CRUD) A tabela de endereçoes está subordinada a de funcionários e clientes */
-cadastra_funcionario(Nome, Usuario, Senha, Func, Rua, Nr_casa, 
+cadastra_funcionario(CdFun, Nome, Usuario, Senha, CdFuncao, Rua, Nr_casa, 
     Complemento, Bairro, Cidade, CEP, Tel1, Tel2) :-
-        funcao:funcao(CdFuncao, Func, TpVis),
+        funcao:funcao(CdFuncao, _, TpVis),
         endereco:insere(CdEnd, Rua, Nr_casa, 
             Complemento, Bairro, Cidade, CEP, Tel1, Tel2),
-        funcionario:insere(_CdFun, CdFuncao, CdEnd, Nome, 
+        funcionario:insere(CdFun, CdFuncao, CdEnd, Nome, 
             Senha, Usuario, TpVis).
 
 remove_funcionario(CdFun) :-
@@ -66,11 +46,11 @@ listar_funcionarios(List) :-
 
 /* FUNCIONÁRIOS (CONSULTAS E CRUD) */
 /* ENDEREÇO (CONSULTAS E CRUD) A tabela de endereçoes está subordinada a de funcionários e clientes */
-cadastra_cliente(RazaoS, Nome, Tipo, CodId, Email, Rua, Nr_casa, 
+cadastra_cliente(CdCliente, RazaoS, Nome, Tipo, CodId, Email, Rua, Nr_casa, 
     Complemento, Bairro, Cidade, CEP, Tel1, Tel2) :-
         endereco:insere(CdEnd, Rua, Nr_casa, 
             Complemento, Bairro, Cidade, CEP, Tel1, Tel2),
-        cliente:insere(_CdCliente, CdEnd, RazaoS, Nome, Email, CodId, Tipo, true).
+        cliente:insere(CdCliente, CdEnd, RazaoS, Nome, Email, CodId, Tipo, false).
 
 remove_cliente(CdCliente) :-
     \+ ordem_servico:ordem_servico(_CdOrdemS, _CdFun, CdCliente, _DtOrdemS, _VlTot, _BoolF),

@@ -52,15 +52,12 @@ user:file_search_path(servico,  material(servico)).
 
 user:file_search_path(backend,  './backend').
 
-user:file_search_path(api,   backend(api)).
-user:file_search_path(api1, api(v1)).
-
-user:file_search_path(bd,  backend(bd)).
 user:file_search_path(schemas,  db(schemas)).
 user:file_search_path(tables,  db(tables)).
 
 :- load_files([ server,
                 routes,
+                backend(db),
                 temp(bootstrap),
                 %carregando pages padrões 
                 frontend(login),
