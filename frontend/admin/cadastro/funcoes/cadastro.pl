@@ -54,6 +54,14 @@ pageCadFuncao(Pedido) -->
             \navpageCadFuncao,
             div([class('row info')], [
                 div([class('col-lg-10 col-md-10')], [
+                    div([class(dropdown), style('padding: 20px 0 0;')], [
+                        button([class('btn btn-secondary dropdown-toogle'), type(button), id('dropdownMenuButton'), 'data-toggle'(dropdown)], 'Funcoes'),
+                        div([class('dropdown-menu')], [
+                            a([class('dropdown-item'), href('/admin/cadastros/funcionarios')], 'Funcionarios'),
+                            a([class('dropdown-item'), href('/admin/cadastros/clientes')], 'Clientes'),
+                            a([class('dropdown-item'), href('/admin/cadastros/funcoes')], 'Funcoes')
+                        ])
+                    ]),
                     h6('Cadastro Realizado com sucesso!'),
                     h6('O codigo cadastrado e ~w!' - CdFuncao),
                     form([method('post'), action('./cadastro')], [
@@ -86,6 +94,14 @@ pageCadFuncao(_Pedido) -->
             \navpageCadFuncao,
             div([class('row info')], [
                 div([class('col-lg-10 col-md-10')], [
+                    div([class(dropdown), style('padding: 20px 0 0;')], [
+                        button([class('btn btn-secondary dropdown-toogle'), type(button), id('dropdownMenuButton'), 'data-toggle'(dropdown)], 'Funcoes'),
+                        div([class('dropdown-menu')], [
+                            a([class('dropdown-item'), href('/admin/cadastros/funcionarios')], 'Funcionarios'),
+                            a([class('dropdown-item'), href('/admin/cadastros/clientes')], 'Clientes'),
+                            a([class('dropdown-item'), href('/admin/cadastros/funcoes')], 'Funcoes')
+                        ])
+                    ]),
                     h6('Nao foi possivel realizar o cadastro!'),
                     form([method('post'), action('./cadastro')], [
                         div([class('form-group row')], [
@@ -117,6 +133,14 @@ pageCadFuncao -->
             \navpageCadFuncao,
             div([class('row info')], [
                 div([class('col-lg-10 col-md-10')], [
+                    div([class(dropdown), style('padding: 20px 0 0;')], [
+                        button([class('btn btn-secondary dropdown-toogle'), type(button), id('dropdownMenuButton'), 'data-toggle'(dropdown)], 'Funcoes'),
+                        div([class('dropdown-menu')], [
+                            a([class('dropdown-item'), href('/admin/cadastros/funcionarios')], 'Funcionarios'),
+                            a([class('dropdown-item'), href('/admin/cadastros/clientes')], 'Clientes'),
+                            a([class('dropdown-item'), href('/admin/cadastros/funcoes')], 'Funcoes')
+                        ])
+                    ]),
                     form([method('post'), action('./cadastro')], [
                         div([class('form-group row')], [
                             label([for('inputFuncao'), class('col-sm-2 col-form-label')], 'Funcao'),

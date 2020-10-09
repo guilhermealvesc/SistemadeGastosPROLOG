@@ -4,11 +4,6 @@
 :- multifile http:location/3.
 :- dynamic   http:location/3.
 
-%% http:location(Apelido, Rota, Opções)
-%      Apelido é como será chamada uma Rota do servidor.
-%      Os apelidos css, icons e js já estão definidos na
-%      biblioteca http/http_server_files, os demais precisam
-%      ser definidos.
 
 http:location(img, root(img), []).
 http:location(home, root(home), []).
@@ -16,8 +11,6 @@ http:location(about, root(about), []).
 http:location(help, root(help), []).
 http:location(serviceorder, root(serviceorder), []).
 http:location(admin, root(admin), []).
-/* http:location(api, root(api), []).
-http:location(api1, api(v1), []). */
 http:location(cadastros, admin(cadastros), []).
 
 http:location(clientes, cadastros(clientes), []).
@@ -61,7 +54,3 @@ http:location(funcoes, cadastros(funcoes), []).
 
 :- http_handler(admin(about), aboutAdmin, []).
 :- http_handler(admin(help), helpAdmin, []).
-
-
-% Backend
-

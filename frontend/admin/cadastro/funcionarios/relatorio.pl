@@ -40,16 +40,12 @@ pageRelFun -->
             \navpageRelFun,
             div([class('row info')], [
                 div([class('col-lg-10 col-md-10')], [
-                    div([class(search)], [
-                        form([method(get)], [
-                            label([for(type)], 'Pesquisar: '),
-                            select([name(type), id(type)], [
-                                option([value(material)], 'Funcionario'),
-                                option([value(estoque)], 'Usuario'),
-                                option([value(servico)], 'Funcao')
-                            ]),
-                            input([type(text)], []),
-                            input([type(button), value('Buscar')], [])
+                    div([class(dropdown), style('padding: 20px 0 0;')], [
+                        button([class('btn btn-secondary dropdown-toogle'), type(button), id('dropdownMenuButton'), 'data-toggle'(dropdown)], 'Funcionarios'),
+                        div([class('dropdown-menu')], [
+                            a([class('dropdown-item'), href('/admin/cadastros/funcionarios')], 'Funcionarios'),
+                            a([class('dropdown-item'), href('/admin/cadastros/clientes')], 'Clientes'),
+                            a([class('dropdown-item'), href('/admin/cadastros/funcoes')], 'Funcoes')
                         ])
                     ]),
                     table([class(table)], [

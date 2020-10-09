@@ -6,25 +6,11 @@
 
 :- use_module(library(http/http_log)).
 
-
-:- use_module(library(http/http_json)).
-
-/* Aumenta a lista de tipos aceitos pelo servidor */
-:- multifile http_json/1.
-
-http_json:json_type('application/x-javascript').
-http_json:json_type('text/javascript').
-http_json:json_type('text/x-javascript').
-http_json:json_type('text/x-json').
-
 :- initialization( servidor(8000) ).
 
 
 :- multifile user:file_search_path/2.
 
-% file_search_path(Apelido, Caminho)
-%     Apelido é como será chamado um Caminho absoluto ou
-%     relativo no sistema de arquivos
 
 user:file_search_path(dir_css, './css').
 user:file_search_path(dir_js,  './js').
